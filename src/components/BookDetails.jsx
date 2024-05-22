@@ -33,6 +33,16 @@ const BookDetails = () => {
           <span className="font-bold text-lg">Review: </span>
           {review}
         </p>
+        <div className="tags-wrapper flex items-center gap-6 border-b-2 pb-6">
+          Tags:
+          <div>
+            {tags.map((tag) => (
+              <button key={tag} className="badge badge-accent ml-4 ">
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
