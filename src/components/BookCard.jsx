@@ -11,7 +11,11 @@ const BookCard = ({ props }) => {
       className="card card-compact bg-base-100 shadow-xl border border-primary"
     >
       <figure className="bg-base-200">
-        <img src={imageUrl} alt={title} className="w-32 h-44" />
+        <img
+          src={imageUrl.replace("L", "M")}
+          alt={title}
+          className="w-32 h-44"
+        />
       </figure>
       <div className="card-body">
         <div className="tags-wrapper flex gap-2">
