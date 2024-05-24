@@ -1,17 +1,38 @@
-const getStoredBooks = () => {
-  const storedBooks = localStorage.getItem("stored-books");
-  if (storedBooks) {
-    return JSON.parse(storedBooks);
+const getStoredWishListBooks = () => {
+  const wishlistBooks = localStorage.getItem("wishlist-books");
+  if (wishlistBooks) {
+    return JSON.parse(wishlistBooks);
   }
   return [];
 };
 
-const saveBook = (bookId) => {
-  const books = getStoredBooks();
+const getStoredReadBooks = () => {
+  const storedReadBooks = localStorage.getItem("read-books");
+  if (storedReadBooks) {
+    return JSON.parse(storedReadBooks);
+  }
+  return [];
+};
+
+const saveReadBook = (bookId) => {
+  const books = getStoredReadBooks();
   if (!books.includes(bookId)) {
     books.push(bookId);
-    localStorage.setItem("stored-books", JSON.stringify(books));
+    localStorage.setItem("read-books", JSON.stringify(books));
   }
 };
 
-export { getStoredBooks, saveBook };
+const saveWishListBooks = (bookId) => {
+  const books = getStoredWishListBooks();
+  if (!books.includes(bookId)) {
+    books.push(bookId);
+    localStorage.setItem("wishlist-books", JSON.stringify(books));
+  }
+};
+
+export {
+  getStoredReadBooks,
+  getStoredWishListBooks,
+  saveReadBook,
+  saveWishListBooks,
+};

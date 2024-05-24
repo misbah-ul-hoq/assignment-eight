@@ -2,7 +2,13 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { getStoredBooks, saveBook } from "../utils/localStorage";
+import {
+  getStoredReadBooks,
+  getStoredWishListBooks,
+  saveReadBook,
+  saveWishListBooks,
+} from "../utils/localStorage";
+
 const BookDetails = () => {
   const books = useLoaderData();
   const currentUrl = parseInt(useParams().id);
@@ -23,20 +29,25 @@ const BookDetails = () => {
   console.log(currentBook);
 
   const handleRead = () => {
-    const savedBooks = getStoredBooks();
+    const savedBooks = getStoredReadBooks();
     if (!savedBooks.includes(bookId)) {
       toast("Congratulations for reading this book");
-      saveBook(bookId);
+      saveReadBook(bookId);
     } else {
       toast.error("You have already read this book");
     }
   };
 
   const handleWishList = () => {
-    const savedBooks = getStoredBooks();
-    if (savedBooks.includes(bookId)) {
-      toast.error("You have already read this book");
-      saveBook(bookId);
+    const savedWishListBooks = getStoredWishListBooks();
+    const savedReadBooks = getStoredReadBooks();
+    if (savedReadBooks.includes(bookId)) {
+      toast.error("Read books can not be added to wishlist.");
+    } else if (savedWishListBooks.includes(bookId)) {
+      toast.error("This book is already in the wishlist");
+    } else {
+      toast("Congratulations! Book added to wishlist");
+      saveWishListBooks(bookId);
     }
   };
 
