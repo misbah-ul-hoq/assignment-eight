@@ -9,6 +9,7 @@ import BookDetails from "./components/BookDetails.jsx";
 import Chart from "./components/Chart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import Contact from "./components/Contact.jsx";
+import About from "./components/About.jsx";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -33,7 +34,7 @@ const route = createBrowserRouter([
       },
       {
         path: "/about",
-        element: "",
+        element: <About />,
       },
       {
         path: "/book/:id",

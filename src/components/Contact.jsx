@@ -10,8 +10,8 @@ const Contact = () => {
             <div className="card-body side back">
               <h3 className="text-xl font-bold">Get in Touch</h3>
               <p className="text-base mb-4">
-                Have questions, feedback, or book recommendations? We'd love to
-                hear from you!
+                Have questions, feedback, or book recommendations? We would love
+                to hear from you!
               </p>
               <a href="mailto:contact@bookvibe.com" className="btn btn-primary">
                 Email Us
