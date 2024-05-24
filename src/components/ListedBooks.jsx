@@ -1,4 +1,51 @@
+import { useEffect, useState } from "react";
+import {
+  getStoredReadBooks,
+  getStoredWishListBooks,
+} from "../utils/localStorage";
+import BookCardContainer from "./listed-books/BookCardContainer";
+
 const ListedBooks = () => {
+  const [tab, setTab] = useState("read");
+
+  const [books, setBooks] = useState([]);
+
+  const [readBooks, setReadBooks] = useState([]);
+
+  const [wishlistBooks, setWishlistBooks] = useState([]);
+
+  const localReadBooks = getStoredReadBooks();
+
+  const localWishlistBooks = getStoredWishListBooks();
+
+  const handleTab = (e) => {
+    const clickedTab = e.target.id;
+
+    setTab(() => {
+      if (clickedTab === "readbooks-tab") {
+        return "read";
+      } else if (clickedTab === "wishlist-tab") {
+        setWishlistBooks(
+          books.filter((book) => localWishlistBooks.includes(book.bookId))
+        );
+        console.log(wishlistBooks);
+        return "wishlist";
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetch("data.json")
+      .then((data) => data.json())
+      .then((data) => {
+        setBooks(data);
+        setReadBooks(
+          data.filter((book) => localReadBooks.includes(book.bookId))
+        );
+      });
+    console.log(books, readBooks);
+  }, []);
+
   return (
     <section className="container-center">
       <div className="title-wrapperr bg-base-200 py-5 my-6 rounded-xl">
@@ -28,16 +75,28 @@ const ListedBooks = () => {
         </div>
       </div>
 
-      <div className="tabs-wrapper flex">
+      <div className="tabs-wrapper flex border-b-2 mb-10">
         <div role="tablist" className="tabs tabs-boxed">
-          <a role="tab" className="tab tab-active">
-            Tab 1
-          </a>
-          <a role="tab" className="tab">
-            Tab 2
-          </a>
+          <button
+            onClick={handleTab}
+            role="tab"
+            id="readbooks-tab"
+            className={`${tab === "read" && "tab-active"} tab`}
+          >
+            Read Books
+          </button>
+          <button
+            onClick={handleTab}
+            role="tab"
+            id="wishlist-tab"
+            className={`tab ${tab === "wishlist" && "tab-active"}`}
+          >
+            WishList Books
+          </button>
         </div>
       </div>
+
+      <BookCardContainer books={tab == "read" ? readBooks : wishlistBooks} />
     </section>
   );
 };
