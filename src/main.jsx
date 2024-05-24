@@ -7,10 +7,12 @@ import Layout from "./components/Layout.jsx";
 import ListedBooks from "./components/ListedBooks.jsx";
 import BookDetails from "./components/BookDetails.jsx";
 import Chart from "./components/Chart.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 const route = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
