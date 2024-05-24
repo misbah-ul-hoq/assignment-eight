@@ -8,6 +8,7 @@ import ListedBooks from "./components/ListedBooks.jsx";
 import BookDetails from "./components/BookDetails.jsx";
 import Chart from "./components/Chart.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
+import Contact from "./components/Contact.jsx";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -28,7 +29,7 @@ const route = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: "",
+        element: <Contact />,
       },
       {
         path: "/about",
